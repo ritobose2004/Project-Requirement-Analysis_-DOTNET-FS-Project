@@ -1,0 +1,181 @@
+.animated-background {
+  background: linear-gradient(-45deg, #a1c4fd, #c2e9fb, #ffecd2, #fcb69f);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.btn-gradient-primary {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #fff;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-gradient-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(42, 82, 152, 0.4);
+}
+
+.btn-gradient-danger {
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: #fff;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-gradient-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 75, 43, 0.4);
+}
+
+.table-gradient {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+}
+
+.card {
+  transition: all 0.3s ease;
+}
+
+.badge-overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+}
+
+.view-wrapper {
+  background: linear-gradient(135deg, #fffcf9 0%, #f1f5f9 100%);
+  min-height: 100vh;
+  padding: 3rem 1rem;
+}
+
+.page-header-container {
+  max-width: 1200px;
+  margin: 0 auto 2.5rem;
+}
+
+.title-accent {
+  color: #0f172a;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+}
+
+/* Refined Stats & Search Bar */
+.action-card {
+  background: white;
+  border: 1px solid #eef2f6;
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  margin-bottom: 2rem;
+}
+
+.search-input-modern {
+  border: 1.5px solid #f1f5f9;
+  background: #f8fafc;
+  border-radius: 0.75rem;
+  padding: 0.6rem 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.search-input-modern:focus {
+  background: white;
+  border-color: #6366f1;
+  /* Indigo Focus */
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* Table Design */
+.table-container {
+  background: white;
+  border-radius: 1.5rem;
+  border: 1px solid #eef2f6;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.05);
+}
+
+.table thead {
+  background: #f8fafc;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.table thead th {
+  color: #64748b;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  padding: 1.25rem;
+  border: none;
+}
+
+.table tbody td {
+  padding: 1.25rem;
+  border-bottom: 1px solid #f8fafc;
+  color: #334155;
+  font-size: 0.95rem;
+}
+
+/* Date & User Badges */
+.user-badge {
+  background: #eef2ff;
+  color: #6366f1;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.date-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+/* Minimalist Action Button */
+.btn-delete-ghost {
+  color: #f43f5e;
+  background: #fff1f2;
+  border: none;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.btn-delete-ghost:hover {
+  background: #f43f5e;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Pagination Styling */
+.pagination .page-link {
+  border: none;
+  color: #64748b;
+  margin: 0 4px;
+  border-radius: 10px;
+  font-weight: 700;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.pagination .page-item.active .page-link {
+  background: #6366f1;
+  /* Indigo */
+  color: white;
+}

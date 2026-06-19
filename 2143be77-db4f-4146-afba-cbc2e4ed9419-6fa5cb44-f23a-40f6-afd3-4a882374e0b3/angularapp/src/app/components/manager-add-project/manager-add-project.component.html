@@ -1,0 +1,163 @@
+<div class="animated-background">
+  <div class="project-card w-100 p-4 p-lg-5" style="max-width: 750px;">
+
+    <header class="text-center mb-5">
+      <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill mb-3 fw-bold"
+        style="font-size: 0.7rem;">
+        MANAGER PORTAL
+      </span>
+      <h2 class="fw-bold text-dark">Create New Project</h2>
+      <p class="text-muted small">Initialize project timelines and technology architecture.</p>
+    </header>
+
+    <form #projectForm="ngForm" (ngSubmit)="addProject(projectForm)" novalidate>
+
+      <!-- PROJECT IDENTITY -->
+      <div class="section-title">PROJECT IDENTITY</div>
+
+      <!-- Project Title -->
+      <div class="mb-4">
+        <label class="form-label">Project Title *</label>
+        <input type="text" class="form-control custom-input" name="projectTitle"
+          placeholder="e.g. Cloud Infrastructure Migration" [(ngModel)]="project.projectTitle" #projectTitle="ngModel"
+          required minlength="5" pattern="^(?!\s)(?!.*\s{2,})^(?!\d).+$"
+          [class.is-invalid-input]="projectTitle.invalid && projectTitle.touched">
+
+          <div class="validation-msg" *ngIf="projectTitle.touched && projectTitle.invalid">
+            <div *ngIf="projectTitle.errors?.['required']">
+              <i class="bi bi-exclamation-circle"></i> Project Title is required
+            </div>
+          
+            <div *ngIf="projectTitle.errors?.['minlength']">
+              <i class="bi bi-exclamation-circle"></i> Title must be at least 5 characters
+            </div>
+          
+            <div *ngIf="projectTitle.errors?.['pattern']">
+              <i class="bi bi-exclamation-circle"></i> Invalid project title format
+            </div>
+          </div>
+      </div>
+
+      <!-- Project Description -->
+      <div class="mb-4">
+        <label class="form-label">Project Description *</label>
+        <textarea class="form-control custom-input" rows="3" name="projectDescription"
+          placeholder="Outline the scope and objectives..." [(ngModel)]="project.projectDescription"
+          #projectDescription="ngModel" required minlength="10" pattern="^(?!\s)(?!.*\s{2,})^(?!\d).+$"
+          [class.is-invalid-input]="projectDescription.invalid && projectDescription.touched"></textarea>
+
+        <div class="validation-msg" *ngIf="projectDescription.touched && projectDescription.invalid">
+          <span *ngIf="projectDescription.errors?.['required']"><i class="bi bi-exclamation-circle"></i> Description is required</span>
+          <span *ngIf="projectDescription.errors?.['minlength']"><i class="bi bi-exclamation-circle"></i> Please provide at least 10 characters</span>
+          <span *ngIf="projectDescription.errors?.['pattern']"><i class="bi bi-exclamation-circle"></i> Invalid description format</span>
+        </div>
+      </div>
+
+      <!-- TIMELINE -->
+      <div class="section-title mt-5">TIMELINE & STATUS</div>
+
+      <div class="row g-4 mb-4">
+        <div class="col-md-4">
+          <label class="form-label">Start Date *</label>
+          <input type="date" class="form-control custom-input" name="startDate" [(ngModel)]="project.startDate"
+            #startDate="ngModel" required [class.is-invalid-input]="startDate.invalid && startDate.touched">
+
+          <div class="validation-msg" *ngIf="startDate.invalid && startDate.touched">
+            <i class="bi bi-exclamation-circle"></i>
+            Start date required
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">End Date *</label>
+          <input type="date" class="form-control custom-input" name="endDate" [(ngModel)]="project.endDate"
+            #endDate="ngModel" required
+            [class.is-invalid-input]="endDate.touched && (endDate.invalid || project.endDate < project.startDate)">
+
+          <div class="validation-msg" *ngIf="endDate.touched">
+            <span *ngIf="endDate.errors?.['required']"><i class="bi bi-exclamation-circle"></i> End date required</span>
+            <span *ngIf="project.startDate && project.endDate && project.endDate < project.startDate">
+              <i class="bi bi-exclamation-circle"></i> Cannot be before start date
+            </span>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Current Status *</label>
+          <select class="form-select custom-input" name="status" [(ngModel)]="project.status" #status="ngModel" required
+            [class.is-invalid-input]="status.invalid && status.touched">
+            <option value="">Select...</option>
+            <option value="InProgress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+
+          <div class="validation-msg" *ngIf="status.invalid && status.touched">
+            <i class="bi bi-exclamation-circle"></i> Select a status
+          </div>
+        </div>
+      </div>
+
+      <!-- TECHNOLOGY -->
+      <div class="section-title mt-5">TECHNOLOGY ARCHITECTURE</div>
+
+      <div class="row g-4 mb-5">
+
+        <!-- Front End -->
+        <div class="col-md-4">
+          <label class="form-label">Front End *</label>
+          <input type="text" class="form-control custom-input" name="frontEndTechStack"
+            [(ngModel)]="project.frontEndTechStack" #frontEnd="ngModel" required pattern="^(?!\s)(?!.*\s{2,})^(?!\d).+$"
+            [class.is-invalid-input]="frontEnd.invalid && frontEnd.touched">
+
+          <div class="validation-msg" *ngIf="frontEnd.touched && frontEnd.invalid">
+            <span *ngIf="frontEnd.errors?.['required']"><i class="bi bi-exclamation-circle"></i> Front End is required</span>
+            <span *ngIf="frontEnd.errors?.['pattern']"><i class="bi bi-exclamation-circle"></i> Invalid front end format</span>
+          </div>
+        </div>
+
+        <!-- Back End -->
+        <div class="col-md-4">
+          <label class="form-label">Back End *</label>
+          <input type="text" class="form-control custom-input" name="backendTechStack"
+            [(ngModel)]="project.backendTechStack" #backEnd="ngModel" required pattern="^(?!\s)(?!.*\s{2,})^(?!\d).+$"
+            [class.is-invalid-input]="backEnd.invalid && backEnd.touched">
+
+          <div class="validation-msg" *ngIf="backEnd.touched && backEnd.invalid">
+            <span *ngIf="backEnd.errors?.['required']"><i class="bi bi-exclamation-circle"></i> Back End is required</span>
+            <span *ngIf="backEnd.errors?.['pattern']"><i class="bi bi-exclamation-circle"></i> Invalid back end format</span>
+          </div>
+        </div>
+
+        <!-- Database -->
+        <div class="col-md-4">
+          <label class="form-label">Database *</label>
+          <input type="text" class="form-control custom-input" name="database" [(ngModel)]="project.database"
+            #db="ngModel" required pattern="^(?!\s)(?!.*\s{2,})^(?!\d).+$" [class.is-invalid-input]="db.invalid && db.touched">
+
+          <div class="validation-msg" *ngIf="db.touched && db.invalid">
+            <span *ngIf="db.errors?.['required']"><i class="bi bi-exclamation-circle"></i> Database is required</span>
+            <span *ngIf="db.errors?.['pattern']"><i class="bi bi-exclamation-circle"></i> Invalid database format</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SUBMIT -->
+      <button type="submit" class="btn btn-submit-pro w-100"
+        [disabled]="projectForm.invalid || (project.startDate && project.endDate && project.endDate < project.startDate)">
+        Publish Project
+      </button>
+
+    </form>
+  </div>
+</div>
+<div class="success-overlay" *ngIf="showSuccessPopup">
+  <div class="success-pill-card shadow-lg">
+    <div class="mb-4 d-inline-flex align-items-center justify-content-center bg-success bg-opacity-10 rounded-circle" style="width: 80px; height: 80px;">
+       <i class="bi bi-check-circle-fill text-success fs-1"></i>
+    </div>
+    <h3 class="fw-bold text-dark mb-2">Project Created</h3>
+    <p class="text-muted small mb-4">Your project has been initialized and added to the bridge dashboard.</p>
+    <button class="btn btn-dark w-100 rounded-pill py-3 fw-bold" (click)="closePopup()">Continue</button>
+  </div>
+</div>

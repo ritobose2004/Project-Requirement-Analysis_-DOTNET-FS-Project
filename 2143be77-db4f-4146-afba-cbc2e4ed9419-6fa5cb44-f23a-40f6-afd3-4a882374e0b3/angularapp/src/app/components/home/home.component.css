@@ -1,0 +1,36 @@
+
+.hero-wrapper {
+  background: #f4f8ff;
+}
+
+.title-gradient {
+  background: linear-gradient(90deg, #0d6efd, #003c91);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.fade-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  animation: fadeLeft 1s ease forwards;
+}
+
+.fade-right {
+  opacity: 0;
+  transform: translateX(40px);
+  animation: fadeRight 1s ease forwards;
+}
+
+@keyframes fadeLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

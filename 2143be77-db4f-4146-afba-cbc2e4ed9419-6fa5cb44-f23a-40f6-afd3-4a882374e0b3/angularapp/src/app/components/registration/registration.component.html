@@ -1,0 +1,153 @@
+<div class="merged-wrapper">
+  <div class="merged-container shadow-xl rounded-4">
+
+    <div class="col-lg-6 image-side d-none d-lg-block">
+      <img src="https://images.unsplash.com/photo-1677078610588-aed2834ad968?w=1200&auto=format&fit=crop&q=70"
+        class="w-100 h-100 object-fit-cover" alt="Registration Visual" />
+    </div>
+
+    <div class="col-12 col-lg-6 form-side">
+
+      <header class="mb-4">
+        <h3 class="fw-bold text-dark mb-1">Create Account</h3>
+        <p class="text-primary small fw-bold mb-0">REQ-BRIDGE PRO</p>
+      </header>
+
+      <form #registration="ngForm" (ngSubmit)="register(registration)" novalidate>
+        <div class="row g-3">
+
+          <!-- Email -->
+          <div class="col-md-12">
+            <label class="form-label fw-bold">Email Address</label>
+            <input type="email" class="form-control modern-input" name="Email" [(ngModel)]="user.Email" #email="ngModel"
+              required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.[a-zA-Z]{2,4}$"
+              placeholder="name@company.com" />
+
+            <div class="text-danger small mt-1" *ngIf="email.touched && email.invalid">
+              <div>
+                <i class="bi bi-exclamation-circle"></i> Invalid email format
+              </div>
+            </div>
+          </div>
+
+          <!-- Username -->
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Username</label>
+            <input type="text" class="form-control modern-input" name="Username" [(ngModel)]="user.Username"
+              #username="ngModel" required pattern="^(?!\s)(?!.*\s{2,})^[A-Za-z0-9].*$" placeholder="User123" />
+
+            <div class="text-danger small mt-1" *ngIf="username.touched && username.invalid">
+              <div *ngIf="username.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i> Username is required
+              </div>
+              <div *ngIf="username.errors?.['pattern']">
+                <i class="bi bi-exclamation-circle"></i> Invalid Username format
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile -->
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Mobile</label>
+            <input type="text" class="form-control modern-input" name="MobileNumber" [(ngModel)]="user.MobileNumber"
+              #mobile="ngModel" required pattern="^[6-9][0-9]{9}$" placeholder="10 digits" />
+
+            <div class="text-danger small mt-1" *ngIf="mobile.touched && mobile.invalid">
+              <div *ngIf="mobile.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i> Mobile number is required
+              </div>
+              <div *ngIf="mobile.errors?.['pattern']">
+                <i class="bi bi-exclamation-circle"></i> Invalid Mobile number format
+              </div>
+            </div>
+          </div>
+
+          <!-- Role -->
+          <div class="col-12">
+            <label class="form-label fw-bold">Role</label>
+            <select class="form-select modern-input" name="UserRole" [(ngModel)]="user.UserRole" #role="ngModel"
+              required>
+              <option value="" disabled>Select your role</option>
+              <option value="ProjectManager">Project Manager</option>
+              <option value="RequirementAnalyst">Requirement Analyst</option>
+            </select>
+
+            <div class="text-danger small mt-1" *ngIf="role.touched && role.invalid">
+              <i class="bi bi-exclamation-circle"></i> Role selection is required
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Password</label>
+            <input type="password" class="form-control modern-input" name="Password" [(ngModel)]="user.Password"
+              #password="ngModel" required [pattern]="passwordPattern" placeholder="••••••••" />
+
+            <div class="text-danger small mt-1" *ngIf="password.touched && password.invalid">
+              <div *ngIf="password.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i> Password is required
+              </div>
+
+              <div *ngIf="password.errors?.['pattern']">
+                <i class="bi bi-exclamation-circle"></i>
+                Password must contain:
+                <ul class="mb-0 ps-3">
+                  <li>At least 8 characters</li>
+                  <li>One uppercase letter</li>
+                  <li>One lowercase letter</li>
+                  <li>One number</li>
+                  <li>One special character</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Confirm</label>
+            <div class="input-group">
+              <input [type]="confirmPasswordVisible ? 'text' : 'password'" class="form-control modern-input"
+                name="ConfirmPassword" [(ngModel)]="user.ConfirmPassword" #confirm="ngModel" required
+                style="border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important;" />
+              <button type="button" class="btn toggle-visibility-btn px-3" (click)="toggleConfirmVisibility()">
+                <i class="bi" [ngClass]="confirmPasswordVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
+              </button>
+            </div>
+
+            <div class="text-danger small mt-1" *ngIf="confirm.touched && user.Password !== user.ConfirmPassword">
+              <i class="bi bi-exclamation-circle"></i> Passwords do not match
+            </div>
+          </div>
+
+        </div>
+        <div *ngIf="registerError" class="alert alert-danger border-0 text-center py-2 mb-4 login-error"
+          style="margin-top: 3%;">
+          <i class="bi bi-exclamation-circle"></i>
+          {{ registerError }}
+        </div>
+
+        <!-- REGISTER BUTTON -->
+        <div class="mt-4">
+          <button type="submit" class="btn submit-btn w-100 fw-bold"
+            [disabled]="!registration.valid || user.Password !== user.ConfirmPassword || isLoading"
+            [ngStyle]="{ 'border-radius': isLoading ? '2rem' : null }">
+
+            <span *ngIf="!isLoading">COMPLETE REGISTRATION</span>
+
+            <span *ngIf="isLoading" class="d-flex align-items-center justify-content-center gap-2">
+              <span class="spinner-border spinner-border-sm"></span>
+              Registering...
+            </span>
+
+          </button>
+
+          <p class="text-center mt-3 small text-muted">
+            Already have an account?
+            <a routerLink="/login" class="text-primary fw-bold text-decoration-none">Login</a>
+          </p>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

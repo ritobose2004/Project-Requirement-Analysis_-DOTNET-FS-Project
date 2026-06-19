@@ -1,0 +1,16 @@
+angularapp/angular.json
+angularapp/.editorconfig
+angularapp/karma.conf.js
+angularapp/tsconfig.json
+angularapp/tsconfig.spec.json
+angularapp/tsconfig.app.json
+angularapp/package-lock.json
+dotnetapp/Migrations
+angularapp/node_modules
+dotnetapp/.config/dotnet-tools.json
+TestProject
+dotnetapp/dotnetapp.sln
+dotnetapp/.env
+dotnetapp/projectStore.log
+dotnetapp/CustomErrorLogs
+dotnetapp/logs

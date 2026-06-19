@@ -1,0 +1,94 @@
+<div class="auth-wrapper d-flex align-items-center justify-content-center min-vh-100 p-4">
+
+  <div class="auth-bg orb orb1"></div>
+  <div class="auth-bg orb orb2"></div>
+
+  <div class="auth-card-container w-100">
+    <div class="auth-card mx-auto p-4 p-md-5">
+
+      <div class="text-center mb-4">
+        <h2 class="text-dark fw-light mb-1"><span class="fw-bold">REQ-BRIDGE PRO</span></h2>
+        <p class="text-secondary small text-uppercase" style="letter-spacing: 2px;">
+          Project Management Portal
+        </p>
+      </div>
+
+      <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" novalidate>
+
+        <div class="mb-4">
+          <label class="form-label text-muted small fw-semibold mb-2 ms-1">Email Address</label>
+          <input type="email" name="Email" class="form-control login-input"
+                 placeholder="manager@reqbridge.pro"
+                 [(ngModel)]="user.Email"
+                 #email="ngModel"
+                 required email>
+
+          <div class="text-danger mt-2 small" *ngIf="email.touched && email.invalid">
+            <i class="bi bi-exclamation-circle"></i>
+            <span *ngIf="email.errors?.['required']"> Email is required</span>
+            <span *ngIf="email.errors?.['email']"> Enter a valid email</span>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label text-muted small fw-semibold mb-2 ms-1">Password</label>
+
+          <div class="input-group">
+            <input [type]="passwordVisible ? 'text' : 'password'"
+                   name="Password"
+                   class="form-control login-input border-end-0"
+                   placeholder="••••••••"
+                   [(ngModel)]="user.Password"
+                   #password="ngModel"
+                   required
+                   style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
+
+            <button type="button"
+                    class="btn login-input border-start-0 d-flex align-items-center justify-content-center"
+                    (click)="togglePasswordVisibility()"
+                    style="border-top-left-radius: 0; border-bottom-left-radius: 0; color: #6366f1;">
+              <i class="bi" [ngClass]="passwordVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
+            </button>
+          </div>
+
+          <div class="text-danger mt-2 small" *ngIf="password.touched && password.invalid">
+            <i class="bi bi-exclamation-circle"></i> Password is required
+          </div>
+        </div>
+
+        <div *ngIf="loginError"
+             class="alert alert-danger border-0 text-center py-2 mb-4 login-error">
+          {{ loginError }}
+        </div>
+
+        <div class="mt-5 mb-3">
+          <button type="submit"
+                  class="btn login-btn w-100"
+                  [disabled]="!loginForm.valid || isLoading"
+                  [ngStyle]="{ 'border-radius': isLoading ? '2rem' : '1rem' }">
+
+            <!-- NORMAL STATE -->
+            <span *ngIf="!isLoading">Login</span>
+
+            <!-- LOADING STATE -->
+            <span *ngIf="isLoading" class="d-flex align-items-center justify-content-center gap-2">
+              <span class="spinner-border spinner-border-sm"></span>
+              Logging in...
+            </span>
+
+          </button>
+        </div>
+
+        
+
+        <div class="text-center">
+          <p class="text-secondary small mb-0">
+            Dont't have an account?
+            <a routerLink="/register" class="text-primary fw-bold ms-1 login-link text-decoration-none">Register here</a>
+          </p>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

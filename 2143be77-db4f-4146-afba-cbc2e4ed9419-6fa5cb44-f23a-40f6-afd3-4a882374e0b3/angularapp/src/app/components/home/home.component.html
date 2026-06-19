@@ -1,0 +1,117 @@
+<style>
+  .hero-wrapper {
+    background: radial-gradient(circle at top right, #f8faff 0%, #ffffff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 5rem 2rem;
+    overflow: hidden;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes titleReveal {
+    0% {
+      filter: blur(10px);
+      opacity: 0;
+      letter-spacing: 0.2em;
+    }
+    100% {
+      filter: blur(0);
+      opacity: 1;
+      letter-spacing: -0.04em;
+    }
+  }
+
+  .animate-title {
+    animation: titleReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .animate-description {
+    opacity: 0; 
+    animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #64748b;
+  }
+
+  .animate-image {
+    opacity: 0;
+    animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
+  }
+
+  .title-gradient {
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .image-viewport {
+    position: relative;
+    padding: 1rem;
+    background: #ffffff;
+    border-radius: 2.5rem;
+    border: 1px solid #f1f5f9;
+    box-shadow: 0 40px 100px -20px rgba(15, 23, 42, 0.1);
+    transition: all 0.5s ease;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .image-viewport:hover {
+    transform: scale(1.02);
+    border-color: #e2e8f0;
+  }
+
+  .hero-img {
+    border-radius: 1.8rem;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    animation: float 6s ease-in-out infinite;
+  }
+
+</style>
+
+<section class="hero-wrapper">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 text-center text-lg-start">
+        <p class="fw-bold mb-3 title-gradient animate-title" style="padding-bottom: 3%;">
+          Req-Bridge Pro
+        </p>
+        <p class="animate-description mb-4">
+          A streamlined platform for managing project requirements and stakeholder alignment. 
+          Requirement Analysts track progress while Project Managers oversee execution, 
+          ensuring continuous improvement through integrated feedback loops.
+        </p>
+      </div>
+
+      <div class="col-lg-6 animate-image">
+        <div class="image-viewport">
+          <img src="https://www.kellerschroeder.com/wp-content/uploads/2023/07/ASG-Why-Do-I-Need-a-Project-Manager.png" 
+               alt="Project Management Collaboration" 
+               class="hero-img">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

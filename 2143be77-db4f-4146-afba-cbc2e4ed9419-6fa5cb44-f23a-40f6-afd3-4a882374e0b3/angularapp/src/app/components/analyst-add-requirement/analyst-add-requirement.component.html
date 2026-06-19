@@ -1,0 +1,78 @@
+<div class="animated-background px-3">
+  <div class="warm-card w-100" style="max-width: 580px;">
+    <div class="card-accent-bar"></div>
+
+    <div class="p-4 p-md-5">
+      <header class="mb-5">
+        <h2 class="fw-bold text-dark mb-2" style="letter-spacing: -0.03em;">New Requirement</h2>
+        <p class="text-muted small">Bridge the vision by adding a detailed requirement below.</p>
+      </header>
+
+      <form #reqForm="ngForm" (ngSubmit)="addRequest(reqForm)" novalidate>
+
+        <!-- REQUIREMENT TITLE -->
+        <div class="mb-4">
+          <label class="form-label">Requirement Title</label>
+          <input type="text" class="form-control custom-input rounded-3" name="RequirementTitle"
+            placeholder="Enter a descriptive title..." [(ngModel)]="newRequirement.RequirementTitle" #title="ngModel"
+            required minlength="5" pattern="^(?!\s)(?!.*\s{2,})^(?!\d).*$" />
+
+          <div class="text-danger small mt-1" *ngIf="title.invalid && (title.dirty || title.touched)">
+            <div *ngIf="title.errors?.['required']">
+              <i class="bi bi-exclamation-circle-fill"></i> Title is mandatory
+            </div>
+
+            <div *ngIf="title.errors?.['minlength']">
+              <i class="bi bi-exclamation-circle-fill"></i> Need at least 5 characters
+            </div>
+
+            <div *ngIf="title.errors?.['pattern']">
+              <i class="bi bi-exclamation-circle-fill"></i> Invalid title format
+            </div>
+          </div>
+        </div>
+
+        <!-- REQUIREMENT DESCRIPTION -->
+        <div class="mb-5">
+          <label class="form-label">Requirement Description</label>
+          <textarea class="form-control custom-input rounded-3" name="RequirementDescription"
+            placeholder="Provide full technical or functional details..."
+            [(ngModel)]="newRequirement.RequirementDescription" #desc="ngModel" rows="6" required minlength="5"
+            pattern="^(?!\s)(?!.*\s{2,})^(?!\d).*$"></textarea>
+
+          <div class="text-danger small mt-1"  *ngIf="desc.invalid && (desc.dirty || desc.touched)">
+            <div *ngIf="desc.errors?.['required']">
+              <i class="bi bi-exclamation-circle-fill "></i> Description is mandatory
+            </div>
+
+            <div *ngIf="desc.errors?.['minlength']">
+              <i class="bi bi-exclamation-circle-fill "></i> Detailed description required
+            </div>
+
+            <div *ngIf="desc.errors?.['pattern']">
+              <i class="bi bi-exclamation-circle-fill "></i> Invalid description format
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-warm w-100 shadow-sm" [disabled]="reqForm.invalid">
+          Publish to Project Bridge
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="success-overlay" *ngIf="showSuccessPopup">
+  <div class="success-card shadow-2xl">
+    <div class="success-icon">
+      <i class="bi bi-check-lg"></i>
+    </div>
+    <h3 class="fw-bold text-dark mb-2">Requirement Published</h3>
+    <p class="text-muted mb-4">The requirement has been successfully added to the project bridge.</p>
+    <button type="button" class="btn btn-dark w-100 rounded-pill py-3 fw-bold" (click)="onOkClick()">
+      Continue
+    </button>
+  </div>
+</div>

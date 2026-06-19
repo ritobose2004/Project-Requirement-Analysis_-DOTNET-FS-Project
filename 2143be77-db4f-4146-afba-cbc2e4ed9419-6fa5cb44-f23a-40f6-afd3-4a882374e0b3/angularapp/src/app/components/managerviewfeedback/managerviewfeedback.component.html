@@ -1,0 +1,148 @@
+
+
+<div class="view-wrapper">
+  <div class="container-xl">
+    
+    <!-- Header -->
+    <div class="page-header-container d-md-flex justify-content-between align-items-end">
+      <div class="text-center text-md-start">
+        <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill mb-2 fw-bold" style="font-size: 0.7rem;">ANALYTICS HUB</span>
+        <h2 class="title-accent display-6 mb-1">Feedback Details</h2>
+        <p class="text-muted mb-0">Aggregate view of user sentiments and project insights.</p>
+      </div>
+      
+      <div class="mt-3 mt-md-0">
+        <div class="bg-white border rounded-pill px-3 py-2 shadow-sm">
+          <span class="text-muted small fw-bold">TOTAL:</span>
+          <span class="text-dark fw-bold ms-1">{{ feedbacks.length }} Feedbacks</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-card mt-4">
+      <div class="row align-items-center g-3">
+        <div class="col-lg-4">
+          <div class="position-relative">
+            <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+            <input type="text" class="form-control search-input-modern ps-5" placeholder="Search insights..." 
+                   [(ngModel)]="searchInput" (input)="searchFeedbacks()" />
+          </div>
+        </div>
+        <div class="col-lg-auto ms-auto" *ngIf="isLoading">
+          <div class="spinner-border spinner-border-sm text-success" role="status"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && !filteredList.length" class="text-center py-5 bg-white rounded-4 shadow-sm border mt-4">
+      <i class="bi bi-chat-square-dots-fill text-muted opacity-25 display-1 mb-3"></i>
+      <h5 class="text-secondary fw-bold">No feedback records found</h5>
+      <p class="text-muted small">No submissions match your current search criteria.</p>
+    </div>
+
+    <!-- Main Table -->
+    <div class="table-container bg-white" *ngIf="!isLoading && paginatedList.length">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0 text-center">
+          <thead>
+            <tr>
+              <th style="width: 80px;">S.No</th>
+              <th>Contributor</th>
+              <th class="text-start">Feedback Message</th>
+              <th>Submission Date</th>
+              <th class="text-end">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of paginatedList; let i = index">
+              <td class="text-muted small fw-bold">
+                {{ (currentPage - 1) * pageSize + i + 1 }}
+              </td>
+              <td>
+                <span class="user-pill">{{ item.userId }}</span>
+              </td>
+              <td class="text-start">
+                <div class="text-dark lh-base" style="max-width: 450px;">{{ item.feedbackText }}</div>
+              </td>
+              <td>
+                <span class="fw-bold text-secondary small">{{ item.date | date:'mediumDate' }}</span>
+              </td>
+              <td class="text-end">
+                <button class="btn btn-view-profile btn-sm" (click)="openProfile(item)">
+                  <i class="bi bi-eye-fill me-1"></i> View Profile
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Mobile Grid -->
+    <div class="d-lg-none mt-4">
+      <div *ngFor="let item of paginatedList" class="card border-0 shadow-sm mb-3 rounded-4">
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="user-pill">{{ item.userId }}</span>
+            <small class="text-muted fw-bold">{{ item.date | date:'shortDate' }}</small>
+          </div>
+          <p class="text-dark small mb-4" style="line-height: 1.6;">"{{ item.feedbackText }}"</p>
+          <button class="btn btn-dark w-100 rounded-pill py-2" (click)="openProfile(item)" style="background: #0f172a;">
+            Full Details
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <nav *ngIf="totalPages > 1" class="d-flex justify-content-center mt-5">
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <button class="page-link shadow-sm" (click)="changePage(currentPage - 1)">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+        </li>
+        <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" 
+            [class.active]="currentPage === i + 1">
+          <button class="page-link shadow-sm" (click)="changePage(i + 1)">{{ i + 1 }}</button>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <button class="page-link shadow-sm" (click)="changePage(currentPage + 1)">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- Refined Profile Modal -->
+<div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg rounded-5 overflow-hidden">
+      <div class="modal-body p-5 text-center">
+        <div class="mb-4 d-inline-flex align-items-center justify-content-center bg-success bg-opacity-10 rounded-circle" 
+             style="width: 90px; height: 90px;">
+          <i class="bi bi-person-badge-fill text-success" style="font-size: 2.5rem;"></i>
+        </div>
+        <h4 class="fw-bold text-dark mb-1">{{ selectedUser?.userId }}</h4> 
+        <div class="text-start bg-light p-4 rounded-4 mb-4 border">
+          <label class="small text-uppercase fw-bold text-muted d-block mb-2" style="letter-spacing: 0.1em;">Message Segment</label>
+          <p class="mb-0 text-dark" style="line-height: 1.7;">{{ selectedUser?.feedbackText }}</p>
+        </div>
+ 
+        <div class="d-flex justify-content-between align-items-center px-2 mb-4">
+          <span class="small text-muted fw-bold"><i class="bi bi-calendar-event me-2"></i>SUBMISSION DATE</span>
+          <span class="small fw-bold text-dark">{{ selectedUser?.date | date:'fullDate' }}</span>
+        </div>
+
+        <button type="button" class="btn btn-dark w-100 rounded-pill py-3 fw-bold shadow-sm" 
+                data-bs-dismiss="modal" style="background: #0f172a;">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

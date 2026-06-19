@@ -1,0 +1,53 @@
+
+<div class="animated-background">
+  <div class="feedback-card w-100 p-4 p-md-5" style="max-width: 550px;">
+
+    <header class="text-center mb-5">
+      <div class="d-inline-flex align-items-center justify-content-center bg-indigo-subtle rounded-circle mb-3"
+        style="width: 60px; height: 60px; background: #eef2ff;">
+        <i class="bi bi-chat-heart text-indigo fs-3" style="color: #6366f1;"></i>
+      </div>
+      <h2 class="fw-bold text-dark mb-2" style="letter-spacing: -0.03em;">Share Feedback</h2>
+      <p class="text-muted small px-lg-4">Your insights help us bridge the gap between complex requirements and
+        successful projects.</p>
+    </header>
+
+    <form #fbForm="ngForm" (ngSubmit)="formsubmitted = true; addFeedback()" novalidate>
+
+      <!-- User ID (Read Only) -->
+      <div class="mb-4">
+        <label for="userid" class="form-label">
+          <i class="bi bi-person-badge"></i> User Reference
+        </label>
+        <input type="text" class="form-control custom-input" id="userid" name="userid" [(ngModel)]="feedbacks.UserId"
+          disabled>
+      </div>
+
+      <!-- Feedback Text -->
+      <div class="mb-5">
+        <label for="feedbacktext" class="form-label">
+          <i class="bi bi-pencil-square"></i> Your Experience
+        </label>
+        <textarea class="form-control custom-input" id="feedbacktext" name="feedbacktext"
+          placeholder="What can we improve? What worked well?..." [(ngModel)]="feedbacks.FeedbackText"
+          #feedbackText="ngModel" required minlength="5" rows="6" pattern="^(?!\s)(?!.*\s{2,})^(?!\d).*$" ></textarea>
+
+        <div class="error-message mt-2 ms-1" *ngIf="(feedbackText.touched || formsubmitted) && feedbackText.invalid">
+          <i class="bi bi-exclamation-circle-fill"></i>
+          <span *ngIf="feedbackText.errors?.['required']">Please provide your feedback.</span>
+          <span *ngIf="feedbackText.errors?.['minlength']">Feedback must be at least 5 characters long.</span>
+          <div *ngIf="feedbackText.errors?.['pattern']">
+             Invalid format
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Action -->
+      <button type="submit" class="btn btn-feedback w-100" [disabled]="fbForm.invalid">
+        <span>Post Feedback</span>
+        <i class="bi bi-arrow-right-short fs-4"></i>
+      </button>
+
+    </form>
+  </div>
+</div>

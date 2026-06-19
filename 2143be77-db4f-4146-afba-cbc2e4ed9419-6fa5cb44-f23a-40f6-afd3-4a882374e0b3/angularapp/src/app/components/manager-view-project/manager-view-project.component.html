@@ -1,0 +1,119 @@
+
+<div class="view-wrapper">
+  <div class="container-xl">
+    
+    <!-- Header -->
+    <div class="page-header text-center">
+      <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill mb-2 fw-bold" style="font-size: 0.7rem;">ADMIN CONSOLE</span>
+      <h2 class="text-dark fw-bold display-6" style="letter-spacing: -0.04em;">Project Repository</h2>
+      <p class="text-muted">Modify, track, and manage project lifecycles and architectures.</p>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-card">
+      <div class="row g-3 align-items-center">
+        <div class="col-md-4">
+          <input class="form-control search-input-modern" placeholder="Search by title..." [(ngModel)]="searchText" (input)="applyFilters()" />
+        </div>
+        <div class="col-md-3">
+          <select class="form-select search-input-modern" [(ngModel)]="selectedStatus" (change)="applyFilters()">
+            <option value="">All Status</option>
+            <option value="InProgress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+        <div class="col-md-1" *ngIf="isLoading">
+          <div class="spinner-border spinner-border-sm text-success"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table Container -->
+    <div class="table-container" *ngIf="paginatedProjects.length; else noData">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0 text-center">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th class="text-start">Project Details</th>
+              <th>Timeline</th>
+              <th>Architecture</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of paginatedProjects; let i = index">
+              <td class="text-muted small fw-bold">#{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+              <td class="text-start">
+                <div class="fw-bold text-dark mb-1">{{ p.projectTitle }}</div>
+                <div class="text-muted small text-truncate" style="max-width: 250px;" [attr.title]="p.projectDescription">{{ p.projectDescription }}</div>
+              </td>
+              <td>
+                <div class="small fw-bold text-secondary">{{ p.startDate | date:'dd MMM yy' }}</div>
+                <div class="small text-muted border-top mt-1 pt-1">{{ p.endDate | date:'dd MMM yy' }}</div>
+              </td>
+              <td>
+                <span class="tech-pill">FE: {{ p.frontEndTechStack }}</span>
+                <span class="tech-pill">BE: {{ p.backendTechStack }}</span>
+                <span class="tech-pill">DB: {{ p.database }}</span>
+              </td>
+              <td>
+                <span class="badge rounded-pill px-3 py-2" 
+                      [ngClass]="p.status === 'Completed' ? 'bg-success-subtle text-success' : 'bg-info-subtle text-info'">
+                  {{ p.status }}
+                </span>
+              </td>
+              <td>
+                <div class="d-flex justify-content-center gap-2">
+                  <button class="btn btn-action btn-edit-pro" (click)="editProject(p.projectId)">Edit</button>
+                  <button class="btn btn-action btn-delete-pro" (click)="openDeletePopup(p.projectId)">Delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <ng-template #noData>
+      <div class="text-center py-5 bg-white rounded-4 border">
+        <i class="bi bi-folder-x display-1 text-muted opacity-25"></i>
+        <h5 class="mt-3 text-secondary">No projects found</h5>
+      </div>
+    </ng-template>
+
+    <!-- Pagination -->
+    <nav *ngIf="totalPages > 1" class="d-flex justify-content-center mt-5">
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <button class="page-link shadow-sm" (click)="changePage(currentPage - 1)">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+        </li>
+        <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" 
+            [class.active]="currentPage === i + 1">
+          <button class="page-link shadow-sm" (click)="changePage(i + 1)">{{ i + 1 }}</button>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <button class="page-link shadow-sm" (click)="changePage(currentPage + 1)">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- Modern Delete Modal -->
+<div class="delete-overlay" *ngIf="showDeletePopup">
+  <div class="card border-0 shadow-lg rounded-4 p-4 text-center" style="max-width: 350px;">
+    <div class="text-danger mb-3"><i class="bi bi-exclamation-octagon display-4"></i></div>
+    <h5 class="fw-bold">Confirm Deletion</h5>
+    <p class="text-muted small">Are you sure? This project data will be permanently removed.</p>
+    <div class="d-grid gap-2">
+      <button class="btn btn-danger rounded-pill py-2 fw-bold" (click)="confirmDelete()">Delete Project</button>
+      <button class="btn btn-light rounded-pill py-2 fw-bold text-muted" (click)="cancelDelete()">Cancel</button>
+    </div>
+  </div>
+</div>

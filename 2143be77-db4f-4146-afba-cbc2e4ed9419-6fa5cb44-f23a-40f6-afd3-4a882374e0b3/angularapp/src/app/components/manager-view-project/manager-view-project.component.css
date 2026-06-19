@@ -1,0 +1,150 @@
+.page-theme {
+  background: linear-gradient(270deg, #f0f9ff, #eef2ff, #ecfeff);
+}
+
+.page-theme .blob1 {
+  background: #93c5fd;
+  top: -140px;
+  left: -140px;
+}
+
+.page-theme .blob2 {
+  background: #67e8f9;
+  bottom: -160px;
+  right: -160px;
+}
+
+.page-theme .gradient-layer {
+  background:
+    radial-gradient(circle at 25% 30%, rgba(59, 130, 246, 0.18), transparent 45%),
+    radial-gradient(circle at 75% 70%, rgba(14, 165, 233, 0.18), transparent 45%);
+}
+
+.view-wrapper {
+  background: linear-gradient(135deg, #fdfcfb 0%, #f1f5f9 100%);
+  min-height: 100vh;
+  padding: 3rem 1rem;
+}
+
+.page-header {
+  max-width: 1200px;
+  margin: 0 auto 2.5rem;
+}
+
+/* Search & Status Filter Bar */
+.filter-card {
+  background: white;
+  border: 1px solid #eef2f6;
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  margin-bottom: 2rem;
+}
+
+.search-input-modern {
+  border: 1.5px solid #f1f5f9;
+  background: #f8fafc;
+  border-radius: 0.75rem;
+  padding: 0.6rem 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.search-input-modern:focus {
+  background: white;
+  border-color: #10b981;
+  /* Sage Green */
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
+/* Table Customization */
+.table-container {
+  background: white;
+  border-radius: 1.5rem;
+  border: 1px solid #eef2f6;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.05);
+}
+
+.table thead th {
+  background: #f8fafc;
+  color: #64748b;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  padding: 1.25rem;
+  border: none;
+}
+
+.table tbody td {
+  padding: 1.25rem;
+  border-bottom: 1px solid #f8fafc;
+  color: #334155;
+  font-size: 0.9rem;
+}
+
+/* Tech Stack Pills */
+.tech-pill {
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  display: inline-block;
+  margin: 2px;
+}
+
+/* Action Buttons */
+.btn-action {
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 6px 14px;
+  transition: all 0.2s ease;
+}
+
+.btn-edit-pro {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #dcfce7;
+}
+
+.btn-edit-pro:hover {
+  background: #16a34a;
+  color: white;
+}
+
+.btn-delete-pro {
+  background: #fef2f2;
+  color: #ef4444;
+  border: 1px solid #fee2e2;
+}
+
+.btn-delete-pro:hover {
+  background: #ef4444;
+  color: white;
+}
+
+/* Overlay for delete */
+.delete-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 2500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ===== COMMON PAGINATION STYLE (MATCHES REQUIREMENTS PAGE) ===== */
+
+.pagination {
+  gap: 6px;
+}
+
+.pagination .page-item .page-link {
+  border-radius: 0.75rem;
+}

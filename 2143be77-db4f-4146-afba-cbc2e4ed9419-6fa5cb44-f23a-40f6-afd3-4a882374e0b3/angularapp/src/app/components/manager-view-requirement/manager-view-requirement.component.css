@@ -1,0 +1,161 @@
+.animated-background {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+  
+  .page-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-theme {
+    background: linear-gradient(270deg, #f8fbff, #eef4ff, #f0fdfa);
+    animation: bgShift 18s ease infinite;
+  }
+
+  .blob {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.35;
+    animation: float 14s ease-in-out infinite;
+  }
+  
+  .blob1 {
+    background: #93c5fd;
+    top: -120px;
+    left: -120px;
+  }
+  
+  .blob2 {
+    background: #67e8f9;
+    bottom: -140px;
+    right: -140px;
+    animation-delay: 3s;
+  }
+
+  .gradient-layer {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(59,130,246,0.15), transparent 45%),
+      radial-gradient(circle at 80% 70%, rgba(14,165,233,0.15), transparent 45%);
+    z-index: 1;
+  }
+  
+  @keyframes bgShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-30px); }
+  }
+  
+  .view-wrapper {
+    background: linear-gradient(135deg, #fdfcfb 0%, #f1f5f9 100%);
+    min-height: 100vh;
+    padding: 3rem 1rem;
+  }
+
+  .page-header {
+    max-width: 1200px;
+    margin: 0 auto 2.5rem;
+  }
+
+  /* Search & Filter Bar */
+  .filter-card {
+    background: white;
+    border: 1px solid #eef2f6;
+    border-radius: 1.25rem;
+    padding: 1.25rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    margin-bottom: 2rem;
+  }
+
+  .custom-control {
+    border: 1.5px solid #f1f5f9;
+    background: #f8fafc;
+    border-radius: 0.75rem;
+    padding: 0.6rem 1.25rem;
+    transition: all 0.3s ease;
+  }
+
+  .custom-control:focus {
+    background: white;
+    border-color: #10b981; /* Sage Green */
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+  }
+
+  /* Modern Table Styling */
+  .table-container {
+    background: white;
+    border-radius: 1.5rem;
+    border: 1px solid #eef2f6;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.05);
+  }
+
+  .table thead th {
+    background: #f8fafc;
+    color: #64748b;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    padding: 1.25rem;
+    border: none;
+  }
+
+  .table tbody td {
+    padding: 1.25rem;
+    border-bottom: 1px solid #f8fafc;
+    color: #334155;
+    font-size: 0.95rem;
+  }
+
+  /* Status Badge Styling */
+  .status-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 0.75rem;
+  }
+
+  /* Modern Action Buttons */
+  .btn-approve {
+    background: #f0fdf4;
+    color: #16a34a;
+    border: 1px solid #dcfce7;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .btn-approve:hover:not(:disabled) {
+    background: #16a34a;
+    color: white;
+  }
+
+  .btn-reject {
+    background: #fef2f2;
+    color: #ef4444;
+    border: 1px solid #fee2e2;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .btn-reject:hover:not(:disabled) {
+    background: #ef4444;
+    color: white;
+  }
+
+  .btn-sm-pro {
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+  }

@@ -1,0 +1,198 @@
+<style>
+  /* 2026 Manager Modern Palette */
+  .animated-background {
+    background: radial-gradient(circle at top left, #fdfcfb 0%, #f1f5f9 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+  }
+
+  .project-card {
+    background: #ffffff;
+    border: 1px solid #eef2f6;
+    border-radius: 2rem;
+    box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+  }
+
+  .form-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #64748b;
+    margin-bottom: 0.6rem;
+  }
+
+  /* Sophisticated Inputs */
+  .custom-input {
+    border: 1.5px solid #f1f5f9 !important;
+    background: #f8fafc !important;
+    padding: 12px 18px;
+    font-size: 0.95rem;
+    color: #1e293b;
+    border-radius: 12px !important;
+    transition: all 0.3s ease;
+  }
+
+  .custom-input:focus {
+    background: #ffffff !important;
+    border-color: #10b981 !important;
+    /* Sage Green */
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1) !important;
+  }
+
+  /* Submit Button (Midnight Slate) */
+  .btn-update-pro {
+    background: #0f172a;
+    color: white;
+    border: none;
+    padding: 16px;
+    font-weight: 700;
+    border-radius: 100px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-update-pro:hover:not(:disabled) {
+    background: #1e293b;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.15);
+  }
+
+  .section-title {
+    font-size: 0.85rem;
+    color: #10b981;
+    font-weight: 800;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+  }
+
+  /* Minimalist Overlay */
+  .success-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .success-pill-card {
+    background: white;
+    border-radius: 2.5rem;
+    padding: 3rem;
+    text-align: center;
+    max-width: 380px;
+    border-top: 6px solid #10b981;
+  }
+</style>
+
+<div class="animated-background px-3" *ngIf="project">
+  <div class="project-card w-100 p-4 p-lg-5" style="max-width: 750px;">
+
+    <header class="text-center mb-5">
+      <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill mb-3 fw-bold"
+        style="font-size: 0.7rem;">EDIT MODE</span>
+      <h2 class="fw-bold text-dark" style="letter-spacing: -0.04em;">Update Project</h2>
+      <p class="text-muted small">Refine project parameters and technology configurations.</p>
+    </header>
+
+    <form #projectForm="ngForm" (ngSubmit)="editProject(projectForm)" novalidate>
+
+
+      <div class="section-title">PROJECT IDENTITY</div>
+      <div class="mb-4">
+        <label class="form-label">Project Title</label>
+        <input type="text" class="form-control custom-input" name="projectTitle" [(ngModel)]="project.projectTitle"
+          #projectTitle="ngModel" required />
+        <div class="text-danger x-small mt-1"
+          *ngIf="projectTitle.invalid && (projectTitle.dirty || projectTitle.touched)">
+          Title is mandatory
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Project Description</label>
+        <textarea class="form-control custom-input" name="projectDescription" [(ngModel)]="project.projectDescription"
+          #projectDescription="ngModel" required rows="3"></textarea>
+      </div>
+
+      <!-- Timeline Section -->
+      <div class="section-title mt-5">TIMELINE & STATUS</div>
+      <div class="row g-4 mb-4">
+        <div class="col-md-4">
+          <label class="form-label">Start Date</label>
+          <input type="date" class="form-control custom-input" name="startDate" [(ngModel)]="project.startDate"
+            #startDate="ngModel" required />
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">End Date</label>
+          <input type="date" class="form-control custom-input" name="endDate" [(ngModel)]="project.endDate"
+            #endDate="ngModel" required />
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Current Status</label>
+          <select class="form-select custom-input" name="status" [(ngModel)]="project.status" #status="ngModel"
+            required>
+            <option value="">Select Status</option>
+            <option value="InProgress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Tech Stack Section -->
+      <div class="section-title mt-5">TECHNOLOGY ARCHITECTURE</div>
+      <div class="row g-4 mb-5">
+        <div class="col-md-4">
+          <label class="form-label">Front End</label>
+          <input type="text" class="form-control custom-input" name="frontEndTechStack"
+            [(ngModel)]="project.frontEndTechStack" required />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Back End</label>
+          <input type="text" class="form-control custom-input" name="backendTechStack"
+            [(ngModel)]="project.backendTechStack" required />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Database</label>
+          <input type="text" class="form-control custom-input" name="database" [(ngModel)]="project.database"
+            required />
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <div class="mb-4" *ngIf="titleExists">
+        <div class="alert bg-danger bg-opacity-10 text-danger border-0 small text-center fw-bold">
+          Project with the same title already exists
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-update-pro w-100" [disabled]="projectForm.invalid">
+        Save Changes
+      </button>
+
+    </form>
+  </div>
+</div>
+
+<!-- Refined Success Popup -->
+<div class="success-overlay" *ngIf="showSuccessPopup">
+  <div class="success-pill-card shadow-lg">
+    <div class="mb-4 d-inline-flex align-items-center justify-content-center bg-success bg-opacity-10 rounded-circle"
+      style="width: 80px; height: 80px;">
+      <i class="bi bi-arrow-repeat text-success fs-1"></i>
+    </div>
+    <h3 class="fw-bold text-dark mb-2">Project Updated</h3>
+    <p class="text-muted small mb-4">All project configurations have been successfully saved to the repository.</p>
+    <button class="btn btn-dark w-100 rounded-pill py-3 fw-bold shadow-sm" (click)="closePopup()"
+      style="background: #0f172a;">Acknowledge</button>
+  </div>
+</div>

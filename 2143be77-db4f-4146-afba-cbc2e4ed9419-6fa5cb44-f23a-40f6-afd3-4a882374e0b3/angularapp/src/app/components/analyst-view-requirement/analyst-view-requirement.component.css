@@ -1,0 +1,200 @@
+.animated-background {
+  background: linear-gradient(-45deg, #a1c4fd, #c2e9fb, #ffecd2, #fcb69f);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.table-gradient {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(37, 117, 252, 0.1);
+}
+
+.input-group-text {
+  border-radius: 50px 0 0 50px;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 2rem 1rem;
+  }
+}
+
+.btn-gradient-danger {
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: #fff;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-gradient-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 75, 43, 0.4);
+}
+
+.btn-gradient-secondary {
+  background: linear-gradient(135deg, #6c757d, #495057);
+  color: #fff;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-gradient-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(73, 80, 87, 0.4);
+}
+
+.btn-sm {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem;
+}
+
+.view-wrapper {
+  background: linear-gradient(135deg, #fffcf9 0%, #f8fafc 100%);
+  min-height: 100vh;
+  padding: 3rem 1rem;
+}
+
+.page-header {
+  max-width: 1200px;
+  margin: 0 auto 2.5rem;
+}
+
+.title-accent {
+  color: #0f172a;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+}
+
+/* Modern Search & Filter Bar */
+.filter-card {
+  background: white;
+  border: 1px solid #eef2f6;
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  margin-bottom: 2rem;
+}
+
+.search-input {
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  border-radius: 0.75rem;
+  padding: 0.6rem 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  background: white;
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
+}
+
+.form-select-modern {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  background-color: #f8fafc;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* Minimalist Table Design */
+.table-container {
+  background: white;
+  border-radius: 1.5rem;
+  border: 1px solid #eef2f6;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+}
+
+.table thead {
+  background: #f8fafc;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.table thead th {
+  color: #64748b;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 1.25rem;
+  border: none;
+}
+
+.table tbody td {
+  padding: 1.25rem;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+  font-size: 0.95rem;
+}
+
+/* Status Badges */
+.badge-pill-modern {
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+/* Custom Pagination */
+.pagination .page-link {
+  border: none;
+  color: #64748b;
+  margin: 0 4px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.pagination .page-item.active .page-link {
+  background: #0f172a;
+  color: white;
+}
+
+/* Delete Button Modern */
+.btn-delete-minimal {
+  color: #ef4444;
+  background: #fef2f2;
+  border: none;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.btn-delete-minimal:hover:not(:disabled) {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-delete-minimal:disabled {
+  opacity: 0.4;
+  background: #f1f5f9;
+  color: #94a3b8;
+}

@@ -1,0 +1,113 @@
+
+<div class="view-wrapper">
+  <div class="container-xl">
+    
+    <!-- Header -->
+    <div class="page-header text-center">
+      <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill mb-2 fw-bold" style="font-size: 0.7rem;">PROJECT OVERVIEW</span>
+      <h2 class="title-accent display-6">Projects</h2>
+      <p class="text-muted">High-level view of active project timelines and descriptions.</p>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-card">
+      <div class="row align-items-center g-3">
+        <div class="col-lg-4">
+          <input
+            type="text"
+            class="form-control search-input w-100"
+            placeholder="Search projects..."
+            [(ngModel)]="searchText"
+            (input)="applySearch()"
+          />
+        </div>
+
+        <div class="col-lg-auto ms-auto d-flex align-items-center gap-3">
+          <div class="d-flex align-items-center gap-2">
+            <span class="text-muted small fw-bold">SORT BY</span>
+            <select class="form-select form-select-sm form-select-modern w-auto" [(ngModel)]="sortKey" (change)="applySort()">
+              <option value="">None</option>
+              <option value="projectTitle">Title</option>
+              <option value="projectDescription">Description</option>
+            </select>
+            <select class="form-select form-select-sm form-select-modern w-auto" [(ngModel)]="sortDir" (change)="applySort()" [disabled]="!sortKey">
+              <option value="asc">ASC</option>
+              <option value="desc">DESC</option>
+            </select>
+          </div>
+          
+          <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success" role="status"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && filteredProjects.length === 0" class="text-center py-5 bg-white rounded-4 shadow-sm border">
+      <div class="mb-3"><i class="bi bi-folder2-open text-muted display-3"></i></div>
+      <h5 class="text-secondary fw-bold">Oops! No record found</h5>
+      <p class="text-muted small">We couldn't find any projects matching your criteria.</p>
+    </div>
+
+    <!-- Project Table -->
+    <div class="table-container" *ngIf="!isLoading && filteredProjects.length > 0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead>
+            <tr>
+              <th class="text-center" style="width: 80px;">S.No</th>
+              <th>Project Details</th>
+              <th class="text-center">Timeline</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let project of paginatedProjects; let i = index">
+              <td class="text-center text-muted fw-bold">
+                {{ (currentPage - 1) * pageSize + i + 1 }}
+              </td>
+              <td>
+                <div class="fw-bold text-dark fs-6 mb-1">{{ project.projectTitle }}</div>
+                <div class="text-muted small lh-base" style="max-width: 500px;">
+                  {{ project.projectDescription }}
+                </div>
+              </td>
+              <td class="text-center">
+                <div class="d-flex justify-content-center gap-2">
+                  <div class="date-box">
+                    <span class="date-label">Start</span>
+                    <span class="date-value">{{ project.startDate | date:'dd MMM yyyy' }}</span>
+                  </div>
+                  <div class="date-box">
+                    <span class="date-label">End</span>
+                    <span class="date-value">{{ project.endDate | date:'dd MMM yyyy' }}</span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <nav *ngIf="totalPages > 1" class="mt-5">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <button class="page-link" (click)="changePage(currentPage - 1)">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+        </li>
+
+        <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+          <button class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</button>
+        </li>
+
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <button class="page-link" (click)="changePage(currentPage + 1)">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</div>
