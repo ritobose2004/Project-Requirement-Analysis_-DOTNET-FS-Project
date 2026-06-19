@@ -215,10 +215,8 @@ This project uses **SonarQube** for continuous code quality analysis. View the q
 
 ## Performance Optimization
 
-- **Caching**: Redis caching for frequently accessed data
 - **Pagination**: Implemented for large datasets
 - **Lazy Loading**: Frontend modules and components
-- **Database Indexing**: Optimized queries with proper indexing
 - **API Rate Limiting**: Implemented for resource protection
 
 ## Security
@@ -281,12 +279,6 @@ docker run -p 5001:5001 -p 4200:4200 project-requirement-analysis
 ### Azure Deployment
 Refer to [Azure Deployment Guide](./Documentation/DEPLOYMENT.md)
 
-## Performance Metrics
-
-- **Page Load Time**: < 2 seconds
-- **API Response Time**: < 500ms (95th percentile)
-- **Database Query Time**: < 200ms (average)
-- **Uptime**: 99.9% SLA
 
 ## License
 
